@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Checkup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        h1 {
+            text-align: center;
+            color: #046b39;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #987c41;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #eafaf1;
+            border: 1px solid #4CAF50;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .result p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Health Checkup</h1>
+
+        <div class="form-group">
+            <label for="temperature">Enter Your Temperature (°C):</label>
+            <input type="number" id="temperature" placeholder="enter">
+        </div>
+
+        <div class="form-group">
+            <label for="bp">Enter Your Blood Pressure (Systolic/Diastolic in mmHg):</label>
+            <input type="text" id="bp" placeholder="enter">
+        </div>
+
+        <div class="form-group">
+            <label for="sugar">Enter Your Blood Sugar Level (mg/dL):</label>
+            <input type="number" id="sugar" placeholder="enter">
+        </div>
+
+        <button onclick="checkHealth()">Check Health</button>
+
+        <div id="result" class="result" style="display:none;">
+            <p><strong>Temperature:</strong> <span id="temp-result"></span></p>
+            <p><strong>Blood Pressure:</strong> <span id="bp-result"></span></p>
+            <p><strong>Blood Sugar:</strong> <span id="sugar-result"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function checkHealth() {
+            // Get user input values
+            const temperature = parseFloat(document.getElementById('temperature').value);
+            const bp = document.getElementById('bp').value.split('/');
+            const sugar = parseFloat(document.getElementById('sugar').value);
+
+            // Validate input
+            if (isNaN(temperature) || isNaN(sugar) || bp.length !== 2 || isNaN(bp[0]) || isNaN(bp[1])) {
+                alert('Please enter valid values for temperature, blood pressure, and sugar levels.');
+                return;
+            }
+
+            // Temperature check
+            let tempMessage = '';
+            if (temperature > 37.5) {
+                tempMessage = 'You may have a fever. Please monitor your symptoms.';
+            } else {
+                tempMessage = 'Your temperature is normal.';
+            }
+
+            // Blood Pressure check
+            let bpMessage = '';
+            const systolic = parseInt(bp[0]);
+            const diastolic = parseInt(bp[1]);
+            if (systolic > 140 || diastolic > 90) {
+                bpMessage = 'Your blood pressure is high. Consider consulting a doctor.';
+            } else if (systolic < 90 || diastolic < 60) {
+                bpMessage = 'Your blood pressure is low. Consider consulting a doctor.';
+            } else {
+                bpMessage = 'Your blood pressure is normal.';
+            }
+
+            // Sugar level check
+            let sugarMessage = '';
+            if (sugar < 70) {
+                sugarMessage = 'Your blood sugar is too low. Consider eating something sweet.';
+            } else if (sugar > 180) {
+                sugarMessage = 'Your blood sugar is high. Please consult your healthcare provider.';
+            } else {
+                sugarMessage = 'Your blood sugar level is normal.';
+            }
+
+            // Display results
+            document.getElementById('temp-result').textContent = tempMessage;
+            document.getElementById('bp-result').textContent = bpMessage;
+            document.getElementById('sugar-result').textContent = sugarMessage;
+
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
