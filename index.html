@@ -27,6 +27,22 @@
         h1 {
             text-align: center;
             color: #046b39;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #55efe2;
+        }
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .form-group {
             margin-bottom: 15px;
@@ -45,7 +61,7 @@
         button {
             width: 100%;
             padding: 10px;
-            background-color: #987c41;
+            background-color: #549c40;
             color: white;
             border: none;
             border-radius: 5px;
@@ -53,7 +69,7 @@
             cursor: pointer;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #227a26;
         }
         .result {
             margin-top: 20px;
@@ -71,7 +87,12 @@
 <body>
 
     <div class="container">
-        <h1>Health Checkup</h1>
+        <h1>
+            <div class="profile-img">
+                <img src="https://i.pinimg.com/originals/c1/e4/f9/c1e4f92fd014f025cf45d378b573977d.jpg" alt="Profile Image">
+            </div>
+            Health Checkup
+        </h1>
 
         <div class="form-group">
             <label for="temperature">Enter Your Temperature (°C):</label>
@@ -114,7 +135,7 @@
             let tempMessage = '';
             if (temperature > 37.5) {
                 tempMessage = 'You may have a fever. Please monitor your symptoms.';
-            } else {
+            } else{
                 tempMessage = 'Your temperature is normal.';
             }
 
