@@ -4,11 +4,6 @@ function checkHealth() {
     const bp = document.getElementById('bp').value.split('/');
     const sugar = parseFloat(document.getElementById('sugar').value);
 
-    // Log inputs to console for debugging
-    console.log('Temperature:', temperature);
-    console.log('Blood Pressure:', bp);
-    console.log('Blood Sugar:', sugar);
-
     // Validate input
     if (isNaN(temperature) || isNaN(sugar) || bp.length !== 2 || isNaN(bp[0]) || isNaN(bp[1])) {
         alert('Please enter valid values for temperature, blood pressure, and sugar levels.');
@@ -50,6 +45,5 @@ function checkHealth() {
     document.getElementById('bp-result').textContent = bpMessage;
     document.getElementById('sugar-result').textContent = sugarMessage;
 
-    // Make the result container visible
     document.getElementById('result').style.display = 'block';
 }
